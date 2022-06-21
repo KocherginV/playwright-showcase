@@ -146,5 +146,66 @@ test.describe('Contact form tests', () => {
 
         await expect(contactEmail).toBeVisible();
         await expect(contactEmail).toHaveText('fake@fakeemail.com');
-    })
+    });
+})
+
+test.describe('Footer tests', () => {
+
+    test('Cookie policy link is displayed', async ({page}) => {
+        const cookiePolicyLink = page.locator('a[href*="cookie"]');
+
+        await expect(cookiePolicyLink).toBeVisible();
+        await expect(cookiePolicyLink).toHaveText('Cookie-Policy');
+    });
+
+    test('Privacy policy link is displayed', async ({page}) => {
+        const privacyPolicyLink = page.locator('a[href*="privacy"]');
+
+        await expect(privacyPolicyLink).toBeVisible();
+        await expect(privacyPolicyLink).toHaveText('Privacy-Policy');
+    });
+
+    test('Admin panel link is displayed', async ({page}) => {
+        const adminLink = page.locator('.text-muted a[href*="admin"]');
+
+        await expect(adminLink).toBeVisible();
+        await expect(adminLink).toHaveText('Admin panel');
+    });
+
+    test('Cookie policy link leads to cookie policy page', async ({page}) => {
+        const cookiePolicyLink = page.locator('a[href*="cookie"]');
+
+        await cookiePolicyLink.click();
+        await expect(page).toHaveURL('https://automationintesting.online/#/cookie');
+    });
+
+    test('Privacy policy link leads to privacy policy page', async ({page}) => {
+        const privacyPolicyLink = page.locator('a[href*="privacy"]');
+
+        await privacyPolicyLink.click();
+        await expect(page).toHaveURL('https://automationintesting.online/#/privacy');
+    });
+
+    test('Admin panel link leads to admin page', async ({page}) => {
+        const adminLink = page.locator('.text-muted a[href*="admin"]');
+        const usernameField = page.locator('#username');
+        const passwordField = page.locator('#password');
+        const loginButton = page.locator('#doLogin');
+
+        await adminLink.click();
+        await expect(page).toHaveURL('https://automationintesting.online/#/admin');
+
+        await expect(usernameField).toBeVisible();
+        await expect(usernameField).toBeEditable();
+        await expect(usernameField).toHaveAttribute('placeholder', 'Username');
+
+        await expect(passwordField).toBeVisible();
+        await expect(passwordField).toBeEditable();
+        await expect(passwordField).toHaveAttribute('placeholder', 'Password');
+
+        await expect(loginButton).toBeVisible();
+        await expect(loginButton).not.toBeDisabled();
+        await expect(loginButton).toHaveText('Login');
+    });
+
 })
