@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { Homepage } from '../pages/homepage';
 
 
 test.beforeEach(async ({ page }) => {
@@ -8,91 +9,85 @@ test.beforeEach(async ({ page }) => {
 test.describe('Banner tests', () => {
 
     test('Should display banner', async ({ page }) => {
-        await expect(page.locator('#collapseBanner')).toBeVisible();
+        const homepage = new Homepage(page);
+
+        await expect(homepage.banner).toBeVisible();
     });
 
     test('Should display four columns', async ({ page }) => {
-        const column = page.locator('.jumbotron > .row > .col-sm-3');
+        const homepage = new Homepage(page);
 
-        await expect(column).toHaveCount(4);
+        await expect(homepage.column).toHaveCount(4);
     });
 
     test('CTA button is displayed', async ({ page }) => {
-        const ctaButton = page.locator('button', {hasText: "Let me hack!"});
+        const homepage = new Homepage(page);
 
-        await expect(ctaButton).toBeVisible();
+        await expect(homepage.ctaButton).toBeVisible();
     });
 
     test('Banner disappears after button is clicked', async ({ page }) => {
-        const ctaButton = page.locator('button', {hasText: "Let me hack!"});
+        const homepage = new Homepage(page);
 
-        await ctaButton.click();
+        await homepage.ctaButton.click();
 
-        await expect(page.locator('#collapseBanner')).not.toBeVisible();
+        await expect(homepage.banner).not.toBeVisible();
     });
 });
 
 test.describe('Room tests', () => {
 
     test('Single room is displayed', async ({ page }) => {
-        const roomConatiner = page.locator('div.row.hotel-room-info').nth(0);
+        const homepage = new Homepage(page);
 
-        await expect(roomConatiner).toBeVisible();
+        await expect(homepage.roomContainer).toBeVisible();
     });
 
     test('Three amendities are displayed inside of the room', async ({ page }) => {
-        const amendities = page.locator('div.row.hotel-room-info > .col-sm-7 ul li');
+        const homepage = new Homepage(page);
 
-        await expect(amendities).toHaveCount(3);
+        await expect(homepage.amendities).toHaveCount(3);
     });
 
     test('Correct amendities are displayed inside of the room', async ({ page }) => {
-        const amendities = page.locator('div.row.hotel-room-info > .col-sm-7 ul li');
+        const homepage = new Homepage(page);
 
-        await expect(amendities).toContainText(['TV', 'WiFi', 'Safe']);
+        await expect(homepage.amendities).toContainText(['TV', 'WiFi', 'Safe']);
     });
 
     test('Calendar is displayed once boook button is clicked', async ({ page }) => {
-        const bookBtn = page.locator('button', {hasText: "Book this room"});
-        const calendar = page.locator('.col-sm-6 .rbc-calendar');
+        const homepage = new Homepage(page);
 
-        await bookBtn.click();
+        await homepage.bookButton.click();
 
-        await expect(calendar).toBeVisible();
+        await expect(homepage.calendar).toBeVisible();
     });
 
     test('Correct month & year are displayed in calendar', async ({ page }) => {
-        const bookBtn = page.locator('button', {hasText: "Book this room"});
-        const month = page.locator('.col-sm-6 .rbc-calendar .rbc-toolbar-label');
-        const date = new Date();
-        const currentMonth = date.toLocaleString('en-us', {month: 'long'}) + " " + date.toLocaleString('en-us', {year: 'numeric'});
+        const homepage = new Homepage(page);
 
-        await bookBtn.click();
+        await homepage.bookButton.click();
 
-        await expect(month).toBeVisible();
-        await expect(month).toContainText(currentMonth);
+        await expect(homepage.month).toBeVisible();
+        await expect(homepage.month).toContainText(homepage.currentMonth.toString());
     });
 
     test('Correct fields are displayed in booking form', async ({ page }) => {
-        const bookBtn = page.locator('button', {hasText: "Book this room"});
-        const firstname = page.locator('[name~=firstname]');
-        const lastname = page.locator('[name~=lastname]');
-        const email = page.locator('[name~=email]');
-        const phone = page.locator('[name~=phone]');
+        const homepage = new Homepage(page);
 
-        await bookBtn.click();
+        await homepage.bookButton.click();
 
-        await expect(firstname).toBeVisible();
-        await expect(firstname).toHaveAttribute('placeholder', 'Firstname');
+        await expect(homepage.firstName).toBeVisible();
+        await expect(homepage.firstName).toHaveAttribute('placeholder', 'Firstname');
 
-        await expect(lastname).toBeVisible();
-        await expect(lastname).toHaveAttribute('placeholder', 'Lastname');
+        await expect(homepage.lastName).toBeVisible();
+        await expect(homepage.lastName).toHaveAttribute('placeholder', 'Lastname');
 
-        await expect(email).toBeVisible();
-        await expect(email).toHaveAttribute('placeholder', 'Email');
+        await expect(homepage.email).toBeVisible();
+        await expect(homepage.email).toHaveAttribute('placeholder', 'Email');
 
-        await expect(phone).toBeVisible();
-        await expect(phone).toHaveAttribute('placeholder', 'Phone');
+        await expect(homepage.phone).toBeVisible();
+        await expect(homepage.phone).toHaveAttribute('placeholder', 'Phone');
     });
 });
 
