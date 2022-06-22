@@ -10,7 +10,7 @@ export class Homepage {
     readonly bookButton: Locator;
     readonly calendar: Locator;
     readonly month: Locator;
-    readonly currentMonth: String;
+    readonly currentMonth: string;
     readonly date: Date;
     readonly firstName: Locator;
     readonly lastName: Locator;
