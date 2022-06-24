@@ -16,6 +16,22 @@ export class Homepage {
     readonly lastName: Locator;
     readonly phone: Locator;
     readonly email: Locator;
+    readonly nameField: Locator;
+    readonly emailField: Locator;
+    readonly phoneField: Locator;
+    readonly subjectField: Locator;
+    readonly messageTextArea: Locator;
+    readonly submitButton: Locator;
+    readonly legalName: Locator;
+    readonly address: Locator;
+    readonly phoneNumber: Locator;
+    readonly contactEmail: Locator;
+    readonly cookiePolicyLink: Locator;
+    readonly privacyPolicyLink: Locator;
+    readonly adminLink: Locator;
+    readonly usernameField: Locator;
+    readonly passwordField: Locator;
+    readonly loginButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -33,5 +49,21 @@ export class Homepage {
         this.lastName =  page.locator('[name~=lastname]');
         this.phone = page.locator('[name~=phone]');
         this.email = page.locator('[name~=email]');
+        this.nameField = page.locator('#name');
+        this.emailField = page.locator('#email');
+        this.phoneField = page.locator('#phone');
+        this.subjectField = page.locator('#subject');
+        this.messageTextArea = page.locator('#description');
+        this. submitButton = page.locator('#submitContact');
+        this.legalName = page.locator('.col-sm-5 p').nth(0);
+        this.address = page.locator('.col-sm-5 p').nth(1);
+        this.phoneNumber = page.locator('.col-sm-5 p').nth(2);
+        this.contactEmail = page.locator('.col-sm-5 p').nth(3);
+        this.cookiePolicyLink = page.locator('a[href*="cookie"]');
+        this.privacyPolicyLink = page.locator('a[href*="privacy"]');
+        this.adminLink = page.locator('.text-muted a[href*="admin"]');
+        this.usernameField = page.locator('#username');
+        this.passwordField = page.locator('#password');
+        this.loginButton = page.locator('#doLogin');
     }
 }

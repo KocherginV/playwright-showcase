@@ -94,113 +94,102 @@ test.describe('Room tests', () => {
 test.describe('Contact form tests', () => {
 
     test('Contact form is displayed', async ({ page }) => {
-        const nameField = page.locator('#name');
-        const emailField = page.locator('#email');
-        const phoneField = page.locator('#phone');
-        const subjectField = page.locator('#subject');
-        const messageTextArea = page.locator('#description');
-        const submitBtn = page.locator('#submitContact');
+        const homepage = new Homepage(page);
 
-        await expect(nameField).toBeVisible();
-        await expect(nameField).toHaveAttribute('placeholder', 'Name');
-        await expect(nameField).toBeEditable();
+        await expect(homepage.nameField).toBeVisible();
+        await expect(homepage.nameField).toHaveAttribute('placeholder', 'Name');
+        await expect(homepage.nameField).toBeEditable();
 
-        await expect(emailField).toBeVisible();
-        await expect(emailField).toHaveAttribute('placeholder', 'Email');
-        await expect(emailField).toBeEditable();
+        await expect(homepage.emailField).toBeVisible();
+        await expect(homepage.emailField).toHaveAttribute('placeholder', 'Email');
+        await expect(homepage.emailField).toBeEditable();
 
-        await expect(phoneField).toBeVisible();
-        await expect(phoneField).toHaveAttribute('placeholder', 'Phone');
-        await expect(phoneField).toBeEditable();
+        await expect(homepage.phoneField).toBeVisible();
+        await expect(homepage.phoneField).toHaveAttribute('placeholder', 'Phone');
+        await expect(homepage.phoneField).toBeEditable();
 
-        await expect(subjectField).toBeVisible();
-        await expect(subjectField).toHaveAttribute('placeholder', 'Subject');
-        await expect(subjectField).toBeEditable();
+        await expect(homepage.subjectField).toBeVisible();
+        await expect(homepage.subjectField).toHaveAttribute('placeholder', 'Subject');
+        await expect(homepage.subjectField).toBeEditable();
 
-        await expect(messageTextArea).toBeVisible();
-        await expect(messageTextArea).toBeEditable();
+        await expect(homepage.messageTextArea).toBeVisible();
+        await expect(homepage.messageTextArea).toBeEditable();
 
-        await expect(submitBtn).toBeVisible();
-        await expect(submitBtn).not.toBeDisabled();
+        await expect(homepage.submitButton).toBeVisible();
+        await expect(homepage.submitButton).not.toBeDisabled();
     });
 
     test('Contact info displayed', async ({ page }) => {
-        const legalName = page.locator('.col-sm-5 p').nth(0);
-        const address = page.locator('.col-sm-5 p').nth(1);
-        const phoneNumber = page.locator('.col-sm-5 p').nth(2);
-        const contactEmail = page.locator('.col-sm-5 p').nth(3);
+        const homepage = new Homepage(page);
 
-        await expect(legalName).toBeVisible();
-        await expect(legalName).toHaveText('Shady Meadows B&B');
+        await expect(homepage.legalName).toBeVisible();
+        await expect(homepage.legalName).toHaveText('Shady Meadows B&B');
 
-        await expect(address).toBeVisible();
-        await expect(address).toHaveText('The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S');
+        await expect(homepage.address).toBeVisible();
+        await expect(homepage.address).toHaveText('The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S');
 
-        await expect(phoneNumber).toBeVisible();
-        await expect(phoneNumber).toHaveText('012345678901');
+        await expect(homepage.phoneNumber).toBeVisible();
+        await expect(homepage.phoneNumber).toHaveText('012345678901');
 
-        await expect(contactEmail).toBeVisible();
-        await expect(contactEmail).toHaveText('fake@fakeemail.com');
+        await expect(homepage.contactEmail).toBeVisible();
+        await expect(homepage.contactEmail).toHaveText('fake@fakeemail.com');
     });
 })
 
 test.describe('Footer tests', () => {
 
     test('Cookie policy link is displayed', async ({page}) => {
-        const cookiePolicyLink = page.locator('a[href*="cookie"]');
+        const homepage = new Homepage(page);
 
-        await expect(cookiePolicyLink).toBeVisible();
-        await expect(cookiePolicyLink).toHaveText('Cookie-Policy');
+        await expect(homepage.cookiePolicyLink).toBeVisible();
+        await expect(homepage.cookiePolicyLink).toHaveText('Cookie-Policy');
     });
 
     test('Privacy policy link is displayed', async ({page}) => {
-        const privacyPolicyLink = page.locator('a[href*="privacy"]');
+        const homepage = new Homepage(page);
 
-        await expect(privacyPolicyLink).toBeVisible();
-        await expect(privacyPolicyLink).toHaveText('Privacy-Policy');
+        await expect(homepage.privacyPolicyLink).toBeVisible();
+        await expect(homepage.privacyPolicyLink).toHaveText('Privacy-Policy');
     });
 
     test('Admin panel link is displayed', async ({page}) => {
-        const adminLink = page.locator('.text-muted a[href*="admin"]');
+        const homepage = new Homepage(page);
 
-        await expect(adminLink).toBeVisible();
-        await expect(adminLink).toHaveText('Admin panel');
+        await expect(homepage.adminLink).toBeVisible();
+        await expect(homepage.adminLink).toHaveText('Admin panel');
     });
 
     test('Cookie policy link leads to cookie policy page', async ({page}) => {
-        const cookiePolicyLink = page.locator('a[href*="cookie"]');
+        const homepage = new Homepage(page);
 
-        await cookiePolicyLink.click();
+        await homepage.cookiePolicyLink.click();
         await expect(page).toHaveURL('https://automationintesting.online/#/cookie');
     });
 
     test('Privacy policy link leads to privacy policy page', async ({page}) => {
-        const privacyPolicyLink = page.locator('a[href*="privacy"]');
+        const homepage = new Homepage(page);
 
-        await privacyPolicyLink.click();
+        await homepage.privacyPolicyLink.click();
         await expect(page).toHaveURL('https://automationintesting.online/#/privacy');
     });
 
     test('Admin panel link leads to admin page', async ({page}) => {
-        const adminLink = page.locator('.text-muted a[href*="admin"]');
-        const usernameField = page.locator('#username');
-        const passwordField = page.locator('#password');
-        const loginButton = page.locator('#doLogin');
+        const homepage = new Homepage(page);
 
-        await adminLink.click();
+        await homepage.adminLink.click();
         await expect(page).toHaveURL('https://automationintesting.online/#/admin');
 
-        await expect(usernameField).toBeVisible();
-        await expect(usernameField).toBeEditable();
-        await expect(usernameField).toHaveAttribute('placeholder', 'Username');
+        await expect(homepage.usernameField).toBeVisible();
+        await expect(homepage.usernameField).toBeEditable();
+        await expect(homepage.usernameField).toHaveAttribute('placeholder', 'Username');
 
-        await expect(passwordField).toBeVisible();
-        await expect(passwordField).toBeEditable();
-        await expect(passwordField).toHaveAttribute('placeholder', 'Password');
+        await expect(homepage.passwordField).toBeVisible();
+        await expect(homepage.passwordField).toBeEditable();
+        await expect(homepage.passwordField).toHaveAttribute('placeholder', 'Password');
 
-        await expect(loginButton).toBeVisible();
-        await expect(loginButton).not.toBeDisabled();
-        await expect(loginButton).toHaveText('Login');
+        await expect(homepage.loginButton).toBeVisible();
+        await expect(homepage.loginButton).not.toBeDisabled();
+        await expect(homepage.loginButton).toHaveText('Login');
     });
 
 })
