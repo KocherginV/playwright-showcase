@@ -1,0 +1,12 @@
+{
+    "credentials": {
+        "valid": {
+            "username": "admin",
+            "password": "password"
+        },
+        "invalid": {
+            "username": "admin",
+            "password": "qwerty1332"
+        }
+    }
+}
