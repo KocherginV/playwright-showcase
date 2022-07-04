@@ -32,6 +32,8 @@ export class Homepage {
     readonly usernameField: Locator;
     readonly passwordField: Locator;
     readonly loginButton: Locator;
+    readonly confirmBookingButton: Locator;
+    readonly cancelBookingButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -65,5 +67,7 @@ export class Homepage {
         this.usernameField = page.locator('#username');
         this.passwordField = page.locator('#password');
         this.loginButton = page.locator('#doLogin');
+        this.confirmBookingButton = page.locator('button.btn.btn-outline-primary.float-right.book-room');
+        this.cancelBookingButton = page.locator('button.btn.btn-outline-danger.float-right.book-room');
     }
 }

@@ -89,6 +89,23 @@ test.describe('Room tests', () => {
         await expect(homepage.phone).toBeVisible();
         await expect(homepage.phone).toHaveAttribute('placeholder', 'Phone');
     });
+
+    test('Booking form can be closed', async ({ page }) => {
+        const homepage = new Homepage(page);
+
+        await homepage.bookButton.click();
+
+        await expect(homepage.calendar).toBeVisible();
+        await expect(homepage.bookButton).not.toBeVisible();
+        await expect(homepage.confirmBookingButton).toBeVisible();
+        await expect(homepage.cancelBookingButton).toBeVisible();
+
+        await homepage.cancelBookingButton.click();
+        await expect(homepage.confirmBookingButton).not.toBeVisible();
+        await expect(homepage.cancelBookingButton).not.toBeVisible();
+        await expect(homepage.calendar).not.toBeVisible();
+        await expect(homepage.bookButton).toBeVisible();
+    });
 });
 
 test.describe('Contact form tests', () => {
@@ -191,5 +208,4 @@ test.describe('Footer tests', () => {
         await expect(homepage.loginButton).not.toBeDisabled();
         await expect(homepage.loginButton).toHaveText('Login');
     });
-
-})
+});
