@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { AdminLoginPage } from '../pages/adminLoginPage';
-import * as testData from '../helpers/testData.json'
-import { Helper } from '../helpers/helper'
+import * as testData from '../helpers/testData.json';
+import { Helper } from '../helpers/helper';
 import { AdminHomePage } from '../pages/adminHomePage';
 
 test.beforeEach(async ({ page }) => {
@@ -45,9 +45,9 @@ test.describe('Messages tests', () => {
 
         await helper.login(testData.credentials.valid.username, testData.credentials.valid.password);
         await adminHomePage.messagesLink.click();
-        await expect(adminHomePage.message).toBeVisible();
-        await expect(adminHomePage.guestName).toHaveText('James Dean');
-        await expect(adminHomePage.messageSubject).toHaveText('Booking enquiry');
+        await expect(adminHomePage.message(0)).toBeVisible();
+        await expect(adminHomePage.guestName(0)).toHaveText('James Dean');
+        await expect(adminHomePage.messageSubject(0)).toHaveText('Booking enquiry');
     });
 
     test('Can read full message',async ({page}) => {
@@ -56,7 +56,7 @@ test.describe('Messages tests', () => {
 
         await helper.login(testData.credentials.valid.username, testData.credentials.valid.password);
         await adminHomePage.messagesLink.click();
-        await adminHomePage.message.click();
+        await adminHomePage.message(0).click();
 
         await expect(adminHomePage.messageModal).toBeVisible();
         await expect(adminHomePage.detailedMessageAuthor).toHaveText('From: James Dean');

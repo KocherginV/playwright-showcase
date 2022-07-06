@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { Homepage } from '../pages/homepage';
+import testData from '../helpers/testData.json';
+import { Helper } from '../helpers/helper';
+import { AdminHomePage } from '../pages/adminHomePage';
 
 
 test.beforeEach(async ({ page }) => {
@@ -151,7 +154,35 @@ test.describe('Contact form tests', () => {
         await expect(homepage.contactEmail).toBeVisible();
         await expect(homepage.contactEmail).toHaveText('fake@fakeemail.com');
     });
-})
+
+    test('Submit message', async ({page}) => {
+        const homepage = new Homepage(page);
+        const helper = new Helper(page);
+        const adminHomePage = new AdminHomePage(page);
+
+        await homepage.nameField.type(testData.message.name);
+        await homepage.emailField.type(testData.message.email);
+        await homepage.phoneField.type(testData.message.phone);
+        await homepage.subjectField.type(testData.message.subject);
+        await homepage.messageTextArea.type(testData.message.body);
+        await homepage.submitButton.click();
+
+        await page.goto('https://automationintesting.online/#/admin');
+        await helper.login(testData.credentials.valid.username, testData.credentials.valid.password);
+
+        await adminHomePage.messagesLink.click();
+        await adminHomePage.message(1).click();
+        await expect(adminHomePage.messageModal).toBeVisible();
+        await expect(adminHomePage.detailedMessageAuthor).toHaveText(`From: ${testData.message.name}`);
+        await expect(adminHomePage.detailedMessageEmail).toHaveText(`Email: ${testData.message.email}`);
+        await expect(adminHomePage.detailedMessageSubject).toHaveText(testData.message.subject);
+        await expect(adminHomePage.detailedMessageText).toHaveText(testData.message.body);
+        await expect(adminHomePage.detailedMessagePhone).toHaveText(`Phone: ${testData.message.phone}`);
+        await adminHomePage.closeMessageModalButton.click();
+        await adminHomePage.deleteMessageButton(1).click();
+        await expect(adminHomePage.message(1)).not.toBeVisible();
+    });
+});
 
 test.describe('Footer tests', () => {
 

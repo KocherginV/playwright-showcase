@@ -8,5 +8,12 @@
             "username": "admin",
             "password": "qwerty1332"
         }
+    },
+    "message": {
+        "name": "John Doe",
+        "email": "johndoe@mail.com",
+        "phone": "01728890909",
+        "subject": "Booking",
+        "body": "Hi,\nmy name is John and I want to book a room. So I am wondering if you can reach out me on the phone so we can discuss details.\nThanks"
     }
 }
