@@ -36,7 +36,7 @@ test.describe('Login tests', () => {
   });
 });
 
-test.describe('Messages tests', () => {
+test.skip('Messages tests', () => {
   test('Can see message', async ({ page }) => {
     const helper = new Helper(page);
     const adminHomePage = new AdminHomePage(page);
