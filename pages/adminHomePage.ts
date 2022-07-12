@@ -15,6 +15,21 @@ export class AdminHomePage {
   readonly detailedMessagePhone: Locator;
   readonly closeMessageModalButton: Locator;
   readonly deleteMessageButton: (number: number) => Locator;
+  readonly roomNameField: Locator;
+  readonly roomTypeDropdown: string;
+  readonly roomAccessibilityDropdown: Locator;
+  readonly roomPrice: Locator;
+  readonly roomWifiCheckbox: Locator;
+  readonly roomRefreshmentCheckbox: Locator;
+  readonly roomTvCheckbox: Locator;
+  readonly roomSafeCheckbox: Locator;
+  readonly roomRadioCheckbox: Locator;
+  readonly roomViewsCheckbox: Locator;
+  readonly createRoomButton: Locator;
+  readonly deleteRoomButton: (number: number) => Locator;
+
+
+
 
   constructor(page: Page) {
     this.page = page;
@@ -31,5 +46,17 @@ export class AdminHomePage {
     this.detailedMessagePhone = page.locator('div[data-testid="message"] > div > .col-2 > p');
     this.closeMessageModalButton = page.locator('button[class="btn btn-outline-primary"]');
     this.deleteMessageButton = (number) => page.locator(`span[data-testid="DeleteMessage${number}"]`);
+    this.roomNameField = page.locator('input[data-testid="roomName"]');
+    this.roomTypeDropdown = String(page.locator('select#type'));
+    this.roomAccessibilityDropdown = page.locator('select#accessible');
+    this.roomPrice = page.locator('#roomPrice');
+    this.roomWifiCheckbox = page.locator('#wifiCheckbox');
+    this.roomTvCheckbox = page.locator('#tvCheckbox');
+    this.roomRadioCheckbox = page.locator('#radioCheckbox');
+    this.roomRefreshmentCheckbox = page.locator('#refreshCheckbox');
+    this.roomSafeCheckbox = page.locator('#safeCheckbox');
+    this.roomViewsCheckbox = page.locator('#viewsCheckbox');
+    this.createRoomButton = page.locator('#createRoom');
+    this.deleteRoomButton = (number) => page.locator(`#room${number} > .col-sm-1 > span`);
   }
 }

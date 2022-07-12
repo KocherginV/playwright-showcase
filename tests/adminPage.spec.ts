@@ -36,6 +36,18 @@ test.describe('Login tests', () => {
   });
 });
 
+test.describe('Room tests', () => {
+  test('Can create room', async ({page}) => {
+    const helper = new Helper(page);
+    const adminHomePage = new AdminHomePage(page);
+    await helper.login(testData.credentials.valid.username, testData.credentials.valid.password);
+    await page.pause();
+    await adminHomePage.roomNameField.type('102');
+    await page.selectOption(adminHomePage.roomTypeDropdown, 'Twin');
+
+  })
+});
+
 test.skip('Messages tests', () => {
   test('Can see message', async ({ page }) => {
     const helper = new Helper(page);
