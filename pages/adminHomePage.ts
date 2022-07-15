@@ -16,7 +16,7 @@ export class AdminHomePage {
   readonly closeMessageModalButton: Locator;
   readonly deleteMessageButton: (number: number) => Locator;
   readonly roomNameField: Locator;
-  readonly roomTypeDropdown: string;
+  readonly roomTypeDropdown: Locator;
   readonly roomAccessibilityDropdown: Locator;
   readonly roomPrice: Locator;
   readonly roomWifiCheckbox: Locator;
@@ -47,7 +47,7 @@ export class AdminHomePage {
     this.closeMessageModalButton = page.locator('button[class="btn btn-outline-primary"]');
     this.deleteMessageButton = (number) => page.locator(`span[data-testid="DeleteMessage${number}"]`);
     this.roomNameField = page.locator('input[data-testid="roomName"]');
-    this.roomTypeDropdown = String(page.locator('select#type'));
+    this.roomTypeDropdown = page.locator('select#type');
     this.roomAccessibilityDropdown = page.locator('select#accessible');
     this.roomPrice = page.locator('#roomPrice');
     this.roomWifiCheckbox = page.locator('#wifiCheckbox');

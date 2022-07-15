@@ -41,9 +41,22 @@ test.describe('Room tests', () => {
     const helper = new Helper(page);
     const adminHomePage = new AdminHomePage(page);
     await helper.login(testData.credentials.valid.username, testData.credentials.valid.password);
+
+    //debug remove as well as change config
     await page.pause();
-    await adminHomePage.roomNameField.type('102');
-    await page.selectOption(adminHomePage.roomTypeDropdown, 'Twin');
+    //end debug
+
+    await adminHomePage.roomNameField.type(testData.room.name);
+    await adminHomePage.roomTypeDropdown.selectOption(testData.room.type);
+    await adminHomePage.roomAccessibilityDropdown.selectOption(testData.room.accessibility);
+    await adminHomePage.roomPrice.type(testData.room.price);
+    await adminHomePage.roomWifiCheckbox.check();
+    await adminHomePage.roomRefreshmentCheckbox.check();
+    await adminHomePage.roomTvCheckbox.check();
+    await adminHomePage.roomSafeCheckbox.check();
+    await adminHomePage.roomRadioCheckbox.check();
+    await adminHomePage.roomViewsCheckbox.check();
+    await adminHomePage.createRoomButton.click();
 
   })
 });
