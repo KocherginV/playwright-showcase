@@ -27,6 +27,9 @@ export class AdminHomePage {
   readonly roomViewsCheckbox: Locator;
   readonly createRoomButton: Locator;
   readonly deleteRoomButton: (number: number) => Locator;
+  readonly createdRoomName: (roomNumber: number) => Locator;
+  readonly createdRoomType: (roomType: string) => Locator;
+  readonly createdRoomAccessibilty: (createdRoomNumber: number, accessible: string) => Locator;
 
 
 
@@ -58,5 +61,8 @@ export class AdminHomePage {
     this.roomViewsCheckbox = page.locator('#viewsCheckbox');
     this.createRoomButton = page.locator('#createRoom');
     this.deleteRoomButton = (number) => page.locator(`#room${number} > .col-sm-1 > span`);
+    this.createdRoomName = (roomNumber) => page.locator(`#roomName${roomNumber}`);
+    this.createdRoomType = (roomType) => page.locator(`#type${roomType}`);
+    this.createdRoomAccessibilty = (createdRoomNumber, accessible) => page.locator(`div[id^="room${createdRoomNumber}"] p[id^="accessible${accessible}"]`);
   }
 }
