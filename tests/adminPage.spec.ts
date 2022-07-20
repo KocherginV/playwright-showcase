@@ -58,6 +58,14 @@ test.describe('Room tests', () => {
     await adminHomePage.roomViewsCheckbox.check();
     await adminHomePage.createRoomButton.click();
 
+    await expect(adminHomePage.createdRoomName(102)).toContainText(testData.room.name);
+    await expect(adminHomePage.createdRoomType('Twin')).toContainText(testData.room.type);
+    //so far fails here, because test does not get the value
+    await expect(adminHomePage.createdRoomAccessibilty(2, 'true')).toHaveValue('true');
+    await expect(adminHomePage.createdRoomPrice(2)).toContainText(testData.room.price);
+    await expect(adminHomePage.createdRoomAmendities(2)).toContainText(testData.room.amendities);
+
+    await adminHomePage.deleteCreatedRoomButton.click();
   })
 });
 

@@ -20,6 +20,7 @@
     "name": "102",
     "type": "Twin",
     "accessibility": "true",
-    "price": "150"
+    "price": "150",
+    "amendities": ["WiFi", "TV", "Refreshments", "Safe", "Radio", "Views"]
   }
 }

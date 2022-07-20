@@ -26,10 +26,12 @@ export class AdminHomePage {
   readonly roomRadioCheckbox: Locator;
   readonly roomViewsCheckbox: Locator;
   readonly createRoomButton: Locator;
-  readonly deleteRoomButton: (number: number) => Locator;
   readonly createdRoomName: (roomNumber: number) => Locator;
   readonly createdRoomType: (roomType: string) => Locator;
   readonly createdRoomAccessibilty: (createdRoomNumber: number, accessible: string) => Locator;
+  readonly createdRoomPrice: (createdRoomNumber: number) => Locator;
+  readonly createdRoomAmendities: (createdRoomNumber: number) => Locator;
+  readonly deleteCreatedRoomButton: (createdRoomNumber: number) => Locator;
 
 
 
@@ -60,9 +62,11 @@ export class AdminHomePage {
     this.roomSafeCheckbox = page.locator('#safeCheckbox');
     this.roomViewsCheckbox = page.locator('#viewsCheckbox');
     this.createRoomButton = page.locator('#createRoom');
-    this.deleteRoomButton = (number) => page.locator(`#room${number} > .col-sm-1 > span`);
     this.createdRoomName = (roomNumber) => page.locator(`#roomName${roomNumber}`);
     this.createdRoomType = (roomType) => page.locator(`#type${roomType}`);
-    this.createdRoomAccessibilty = (createdRoomNumber, accessible) => page.locator(`div[id^="room${createdRoomNumber}"] p[id^="accessible${accessible}"]`);
+    this.createdRoomAccessibilty = (createdRoomNumber, accessible) => page.locator(`div[id="room${createdRoomNumber}"] p[id^="accessible${accessible}"]`);
+    this.createdRoomPrice = (createdRoomNumber) => page.locator(`div[id="room${createdRoomNumber}"] p[id^="roomPrice"]`);
+    this.createdRoomAmendities = (createdRoomNumber) => page.locator(`div[id="room${createdRoomNumber}"] .col-sm-5 > p`);
+    this.deleteCreatedRoomButton = (createdRoomNumber) => page.locator(`div[id="room${createdRoomNumber}"] > .col-sm-1 > span`);
   }
 }
