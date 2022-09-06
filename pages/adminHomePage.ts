@@ -15,23 +15,6 @@ export class AdminHomePage {
   readonly detailedMessagePhone: Locator;
   readonly closeMessageModalButton: Locator;
   readonly deleteMessageButton: (number: number) => Locator;
-  readonly roomNameField: Locator;
-  readonly roomTypeDropdown: Locator;
-  readonly roomAccessibilityDropdown: Locator;
-  readonly roomPrice: Locator;
-  readonly roomWifiCheckbox: Locator;
-  readonly roomRefreshmentCheckbox: Locator;
-  readonly roomTvCheckbox: Locator;
-  readonly roomSafeCheckbox: Locator;
-  readonly roomRadioCheckbox: Locator;
-  readonly roomViewsCheckbox: Locator;
-  readonly createRoomButton: Locator;
-  readonly createdRoomName: (roomNumber: number) => Locator;
-  readonly createdRoomType: (roomType: string) => Locator;
-  readonly createdRoomAccessibilty: (createdRoomNumber: number, accessible: string) => Locator;
-  readonly createdRoomPrice: (createdRoomNumber: number) => Locator;
-  readonly createdRoomAmendities: (createdRoomNumber: number) => Locator;
-  readonly deleteCreatedRoomButton: (createdRoomNumber: number) => Locator;
 
 
 
@@ -51,22 +34,5 @@ export class AdminHomePage {
     this.detailedMessagePhone = page.locator('div[data-testid="message"] > div > .col-2 > p');
     this.closeMessageModalButton = page.locator('button[class="btn btn-outline-primary"]');
     this.deleteMessageButton = (number) => page.locator(`span[data-testid="DeleteMessage${number}"]`);
-    this.roomNameField = page.locator('input[data-testid="roomName"]');
-    this.roomTypeDropdown = page.locator('select#type');
-    this.roomAccessibilityDropdown = page.locator('select#accessible');
-    this.roomPrice = page.locator('#roomPrice');
-    this.roomWifiCheckbox = page.locator('#wifiCheckbox');
-    this.roomTvCheckbox = page.locator('#tvCheckbox');
-    this.roomRadioCheckbox = page.locator('#radioCheckbox');
-    this.roomRefreshmentCheckbox = page.locator('#refreshCheckbox');
-    this.roomSafeCheckbox = page.locator('#safeCheckbox');
-    this.roomViewsCheckbox = page.locator('#viewsCheckbox');
-    this.createRoomButton = page.locator('#createRoom');
-    this.createdRoomName = (roomNumber) => page.locator(`#roomName${roomNumber}`);
-    this.createdRoomType = (roomType) => page.locator(`#type${roomType}`);
-    this.createdRoomAccessibilty = (createdRoomNumber, accessible) => page.locator(`div[id="room${createdRoomNumber}"] p[id^="accessible${accessible}"]`);
-    this.createdRoomPrice = (createdRoomNumber) => page.locator(`div[id="room${createdRoomNumber}"] p[id^="roomPrice"]`);
-    this.createdRoomAmendities = (createdRoomNumber) => page.locator(`div[id="room${createdRoomNumber}"] .col-sm-5 > p`);
-    this.deleteCreatedRoomButton = (createdRoomNumber) => page.locator(`div[id="room${createdRoomNumber}"] > .col-sm-1 > span`);
   }
 }
